@@ -97,7 +97,6 @@ public class MapViewCustom extends MapView {
 							&& !(gp4.longitude > gp.longitude && gp4.latitude < gp.latitude)) {
 
 						bmp.launchInfoView(mc.id);
-						System.out.println("coucou " + mc.id);
 						break;
 					}
 				}

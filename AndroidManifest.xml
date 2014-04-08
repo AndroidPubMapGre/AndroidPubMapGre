@@ -14,6 +14,7 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".BasicMapViewer" android:label="BasicMapViewer" />
+		<activity android:name=".BasicMapViewer" android:label="BasicMapViewer" android:screenOrientation="portrait" />
+		<activity android:name=".InfoView" android:label="InfoView" android:screenOrientation="portrait"/>
 	</application>
 </manifest>

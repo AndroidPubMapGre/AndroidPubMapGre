@@ -82,11 +82,15 @@ public class BasicMapViewer extends MapActivity {
 	}
 
 	public void launchInfoView(int idPOI) {
-		Intent i = new Intent(this, InfoView.class);
-
-		i.putExtra("paramArrayPOI", idPOI);
-		// Log.i("error", "coucou" + i.getParcelableArrayListExtra("paramArrayPOI"));
-		startActivity(i);
+		if (arrayPOI.get(idPOI) != null) {
+			System.out.println("coucou " + idPOI);
+			Intent i = new Intent(this, InfoView.class);
+			i.putExtra("paramIdPOI", idPOI);
+			i.putParcelableArrayListExtra("paramArrayPOI", arrayPOI);
+			startActivity(i);
+		} else {
+			Toast.makeText(this, "Aucun POI associé", Toast.LENGTH_LONG).show();
+		}
 	}
 
 	private MarkerCustom createMarker(int resourceIdentifier, GeoPoint geoPoint, int id) {
