@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activate_gps">Activer le GPS</string>
+    <string name="not_activate_gps">Votre GPS n\'est pas activé</string>
+    <string name="cancel">Cancel</string>
+    <string name="activate_device">Le GPS est activé sur votre appareil</string>
+</resources>

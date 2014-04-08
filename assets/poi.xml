@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locationdata>
+	<poi>    
+		<id>1</id>
+	    <titre>Ecole de la paix</titre>
+		<lat>45.192982</lat>
+		<lon>5.732535</lon>
+		<description>L'Ecole de la paix est une association, créée en 1998, qui agit pour la promotion de la culture de la paix par le biais de l'éducation.
+		A Grenoble, son équipe intervient dans de nombreuses écoles primaires, collèges et lycées.
+		A l'étranger, c'est au Rwanda, au Congo Brazzaville, en Colombie et en Tunisie que l'association intervient pour aider les populations après des conflits.
+		Pour en savoir plus: www.ecoledelapaix.org
+		
+		L'Ecole de la paix est à l'origine du projet de visite en réalité augmentée que vous avez entre les mains.</description>
+	</poi>
+	<poi>
+		<id>2</id>
+	    <titre>Rue Très­Cloîtres</titre>
+		<lat>45.192740</lat>
+		<lon>5.733073</lon>
+		<description>Si aujourd'hui le quartier où vous vous trouvez comporte bien trois "anciens" cloîtres, l'origine de son nom est l'objet d'un petit mystère.
+		Très­Cloîtres, trois cloîtres?
+		Une autre piste nous mène vers l'histoire même de la création de ce quartier, qui avant d'être partie intégrante du centre­ville de Grenoble, fut un faubourg et avant même… un lieu indistinct. Le terme d'alors, latin, le désignait comme l'espace qui se trouve de l'autre coté du rempart. "Très­Cloîtres" viendrait alors de "trans­cloîtres", littéralement "au­delà de la porte, au­delà du mur d'enceinte".
+		
+		Cette piste nous guide tout droit vers l'histoire de ce lieu de vie.
+		Alors pourquoi "hors les murs"? Et bien, tout simplement parce qu'à l'époque d'un Grenoble qui était encore Cularo, la cité gallo­romaine, dormaient "hors les murs" les pauvres, les migrants et les gens de passage.
+		Des son origine, Très­Cloîtres est donc le lieu de vie de ceux qui arrivent à la ville.
+		
+		Aujourd'hui encore, comme vous allez le découvrir, ce lieu reste le quartier où s'installent les nouveaux grenoblois.</description>
+	</poi>
+	<poi>
+		<id>3</id>
+	    <titre>Couvent Sainte Marie d'en Bas</titre>
+		<lat>45.192308</lat>
+		<lon>5.733886</lon>
+		<description>La disposition des lieux de cultes dans le quartier Très­Cloîtres doit peu au hasard. Si autour de la cathédrale s'articulent pas moins de trois autres lieux de culte catholique, c'est dans l'histoire des religions en France et à Grenoble qu'il faut aller chercher l'explication.
+		
+		Les Guerres de religions mettent le pays à feu et à sang entre 1562 et 1598. A Grenoble, la situation est particulière puisque sous l'autorité de François de Bonne de Lesdiguières, noble protestant, la ville devient un lieu de moindre persécution pour les Protestants de l'époque.
+		A la fin du 16e siècle, ceux­ci se concentrent dans les zones situées à la périphérie de la ville et notamment à Très­Cloîtres.
+		Lesdiguières instaure un climat de tolérance religieuse entre les habitants qui n'empêche pas les deux Eglises de s'engager dans une relation de concurrence pour le contrôle des âmes et donc le contrôle des habitants de Grenoble.
+		Dans cette lutte de tous les jours, la ville est divisée en quartiers catholiques et protestants. Le combat se fait pour le contrôle de chaque rue.
+		Dès lors, si les Protestants sont tolérés, il leur reste interdit de construire des lieux de cultes à l'intérieur des rampants de la ville. C'est donc dans les zones du pourtour de Grenoble que des temples apparaissent et notamment… à Très­Cloîtres.
+		Malgré la proclamation de l'Edit de Nantes, en 1598, qui met fin aux guerres de religion, la Contre­Réforme, destinée à contrer l'influence grandissante du protestantisme en France va s'incarner par l'implantation de lieux de culte catholiques à Grenoble.
+		Une véritable ceinture vient repousser les protestants: les Bernardines s'installent au Couvent Ste­Cécile en 1624, les Minimes en 1646 et les Visitandines fondent Sainte­
+		Marie d'en Bas en 1647.
+
+		Aujourd'hui Ste­Marie d'en bas est un lieu de culture: théâtre et lieu de concert.</description>
+	</poi>
+	<poi>
+		<id>∞</id>
+	    <titre>POOP</titre>
+		<lat>45.192740</lat>
+		<lon>5.733073</lon>
+		<description></description>
+	</poi>
+</locationdata>
