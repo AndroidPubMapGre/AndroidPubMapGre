@@ -8,7 +8,7 @@ public class POI implements Parcelable {
 	protected double lat;
 	protected double lon;
 	protected int id;
-	protected String description;
+	protected String description = null;
 	protected String titre;
 	protected String img;
 

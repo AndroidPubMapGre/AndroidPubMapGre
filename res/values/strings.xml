@@ -4,4 +4,8 @@
     <string name="not_activate_gps">Votre GPS n\'est pas activé</string>
     <string name="cancel">Cancel</string>
     <string name="activate_device">Le GPS est activé sur votre appareil</string>
+    <string name="action_tts">TTS</string>
+    <string name="action_search">Rechercher</string>
+    <string name="search_hint">Rechercher</string>
+    <string name="app_name">GrenoblePOI</string>
 </resources>

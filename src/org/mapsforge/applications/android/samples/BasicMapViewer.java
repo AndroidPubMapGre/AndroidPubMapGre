@@ -21,24 +21,34 @@ import java.util.List;
 import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.overlay.ListOverlay;
 import org.mapsforge.android.maps.overlay.Marker;
+import org.mapsforge.android.maps.overlay.MyLocationOverlay;
 import org.mapsforge.android.maps.overlay.OverlayItem;
 import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.map.reader.header.FileOpenResult;
 
+import android.annotation.SuppressLint;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 /**
  * A simple application which demonstrates how to use a MapView.
  */
+@SuppressLint("NewApi")
 public class BasicMapViewer extends MapActivity {
 	private static final File MAP_FILE = new File(Environment.getExternalStorageDirectory().getPath(),
 			"rhone-alpes.map");
 	ArrayList<POI> arrayPOI;
+	private MyLocationOverlay myLocationOverlay;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +88,40 @@ public class BasicMapViewer extends MapActivity {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.map_bar_menu, menu);
+
+		// Associate searchable configuration with the SearchView
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public void startActivity(Intent intent) {
+		// check if search intent
+		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+			intent.putParcelableArrayListExtra("paramArrayPOI", arrayPOI);
+		}
+
+		super.startActivity(intent);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Take appropriate action for each action item click
+		switch (item.getItemId()) {
+			case R.id.action_search:
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 
