@@ -47,10 +47,9 @@ import android.widget.Toast;
 public class BasicMapViewer extends MapActivity {
 	private static final File MAP_FILE = new File(Environment.getExternalStorageDirectory().getPath(),
 			"rhone-alpes.map");
-	private static final int UPDATE_DISTANCE = 0;
-	private static final int UPDATE_INTERVAL = 1000;
 	ArrayList<POI> arrayPOI;
 	GPSTracker gps;
+	MapViewCustom mapView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,23 +58,23 @@ public class BasicMapViewer extends MapActivity {
 		try {
 			Bundle b = getIntent().getExtras();
 
-			arrayPOI = new ArrayList<POI>();
-			arrayPOI = b.getParcelableArrayList("paramArrayPOI");
+			this.arrayPOI = new ArrayList<POI>();
+			this.arrayPOI = b.getParcelableArrayList("paramArrayPOI");
 
-			MapViewCustom mapView = new MapViewCustom(this, arrayPOI, this);
-			mapView.setClickable(true);
-			mapView.setBuiltInZoomControls(true);
-			FileOpenResult fileOpenResult = mapView.setMapFile(MAP_FILE);
+			this.mapView = new MapViewCustom(this, this.arrayPOI, this);
+			this.mapView.setClickable(true);
+			this.mapView.setBuiltInZoomControls(true);
+			FileOpenResult fileOpenResult = this.mapView.setMapFile(MAP_FILE);
 			if (!fileOpenResult.isSuccess()) {
 				Toast.makeText(this, fileOpenResult.getErrorMessage(), Toast.LENGTH_LONG).show();
 				finish();
 			}
-			setContentView(mapView);
+			setContentView(this.mapView);
 
 			ListOverlay listOverlay = new ListOverlay();
 			List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
 
-			for (POI poi : arrayPOI) {
+			for (POI poi : this.arrayPOI) {
 				GeoPoint gp = new GeoPoint(poi.lat, poi.lon);
 				MarkerCustom marker1 = createMarker(R.drawable.marker_red, gp, poi.id);
 				overlayItems.add(marker1);
@@ -84,15 +83,8 @@ public class BasicMapViewer extends MapActivity {
 			GeoPoint geoPoint = new GeoPoint(45.187672, 5.726871);
 			MapPosition newMapPosition = new MapPosition(geoPoint, (byte) 15);
 
-			mapView.getMapViewPosition().setMapPosition(newMapPosition);
-			mapView.getOverlays().add(listOverlay);
-
-			// overlayItems = listOverlay.getOverlayItems();
-
-			// Activation du GPS
-			Drawable drawable = getResources().getDrawable(R.drawable.marker_green);
-			gps = new GPSTracker(BasicMapViewer.this, mapView, drawable);
-			gps.enableMyLocation(true);
+			this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
+			this.mapView.getOverlays().add(listOverlay);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -116,7 +108,7 @@ public class BasicMapViewer extends MapActivity {
 	public void startActivity(Intent intent) {
 		// check if search intent
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-			intent.putParcelableArrayListExtra("paramArrayPOI", arrayPOI);
+			intent.putParcelableArrayListExtra("paramArrayPOI", this.arrayPOI);
 		}
 
 		super.startActivity(intent);
@@ -126,7 +118,15 @@ public class BasicMapViewer extends MapActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Take appropriate action for each action item click
 		switch (item.getItemId()) {
-			case R.id.action_search:
+			case R.id.action_geoloc:
+				// Activation du GPS
+				Drawable drawable = getResources().getDrawable(R.drawable.ic_action_location_found);
+				this.gps = new GPSTracker(BasicMapViewer.this, this.mapView, drawable);
+				this.gps.setSnapToLocationEnabled(true);
+				this.gps.enableMyLocation(true);
+				if (this.gps.isMyLocationEnabled()) {
+					Toast.makeText(this, R.string.gps_activation, Toast.LENGTH_LONG).show();
+				}
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -134,11 +134,11 @@ public class BasicMapViewer extends MapActivity {
 	}
 
 	public void launchInfoView(int idPOI) {
-		if (arrayPOI.get(idPOI) != null) {
+		if (this.arrayPOI.get(idPOI) != null) {
 			System.out.println("coucou " + idPOI);
 			Intent i = new Intent(this, InfoView.class);
 			i.putExtra("paramIdPOI", idPOI);
-			i.putParcelableArrayListExtra("paramArrayPOI", arrayPOI);
+			i.putParcelableArrayListExtra("paramArrayPOI", this.arrayPOI);
 			startActivity(i);
 		} else {
 			Toast.makeText(this, "Aucun POI associé", Toast.LENGTH_LONG).show();

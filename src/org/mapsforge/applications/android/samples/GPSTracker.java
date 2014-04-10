@@ -58,12 +58,12 @@ public class GPSTracker implements LocationListener, Overlay {
 	}
 
 	private static Paint getDefaultCircleFill() {
-		return getPaint(Style.FILL, Color.BLUE, 48);
+		return getPaint(Style.FILL, Color.BLUE, 35);
 	}
 
 	private static Paint getDefaultCircleStroke() {
-		Paint paint = getPaint(Style.STROKE, Color.BLUE, 128);
-		paint.setStrokeWidth(2);
+		Paint paint = getPaint(Style.STROKE, Color.BLUE, 80);
+		paint.setStrokeWidth(1);
 		return paint;
 	}
 

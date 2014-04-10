@@ -5,4 +5,8 @@
           android:title="@string/action_search"
           android:showAsAction="always"
       	  android:actionViewClass="android.widget.SearchView"/>
+    <item android:id="@+id/action_geoloc"
+          android:icon="@drawable/ic_action_location_found_menu"
+          android:title="@string/action_geoloc"
+          android:showAsAction="ifRoom"/>
 </menu>
