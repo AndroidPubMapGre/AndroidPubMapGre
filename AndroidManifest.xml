@@ -3,7 +3,9 @@
 	package="org.mapsforge.applications.android.samples" android:versionCode="8" android:versionName="0.3.1-SNAPSHOT">
 
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 	<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17" />
 

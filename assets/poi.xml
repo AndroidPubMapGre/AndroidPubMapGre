@@ -46,6 +46,53 @@
 		Aujourd'hui Ste­Marie d'en bas est un lieu de culture: théâtre et lieu de concert.</description>
 	</poi>
 	<poi>
+		<id>4</id>
+	    <titre>Rue Chenoise</titre>
+		<lat>45.193327</lat>
+		<lon>5.731468</lon>
+		<description>La rue Chenoise, autrefois "Chaunesia", tire son nom de la famille Chaulnais ou Chaunais dont on retrouve la trace dans le Grenoble du XIe siècle. Elle est à l'origine de la construction de la Tour de Sassenage que vous pouvez observer au niveau du No3 de la rue.
+		Aujourd'hui sombre, la rue Chenoise connait ses heures de gloire après la révolution puisqu'elle accueillait plusieurs hôtels particuliers, détenus par les aristocrates de l'époque derrière les lourdes double­portes qui la jalonnent.</description>
+	</poi>
+	<poi>
+		<id>5</id>
+	    <titre>Tour de Sassenage</titre>
+		<lat>45.193210</lat>
+		<lon>5.731205</lon>
+		<description>La tour de Sassenage se dessine au­dessus des toits du centre­ville historique de Grenoble. Construite en briques, elle a la forme d'un donjon qui traduit la qualité ou les prétentions nobiliaires de la famille Chaulnay qui l'a fit construire au XIe siècle.
+		
+		C'est au XVIIe qu'elle sera incluse dans un hôtel particulier en reconstruction à l'époque. 
+		
+		Cette construction en brique se retrouve d'ailleurs plus loin dans la rue, au No20, qui abritait un autre hôtel particulier dont les deux bâtiments s'organisent autour d'une cour. A propos de l'utilisation de la brique comme matériau de construction, les historiens s'accordent à penser qu'ils témoignent de l'apparition des habitations à plusieurs étages autour du Xe­XIe siècles, qui deviendront typiques de l'architecture des centres urbains.
+		
+		Pour aller plus loin, lire le travail d'Alain de Montjoye, "La maison médiévale en brique(XIIe­XIVe siècles) en France méridionale", disponible sur http://www.societes-savantes-toulouse.asso.fr/samf/memoires/hrseri2002/MONTJOYE.pdf</description>
+	</poi>
+	<poi>
+		<id>6</id>
+	    <titre>Rue Brocherie</titre>
+		<lat>45.192813</lat>
+		<lon>5.731194</lon>
+		<description>Aujourd'hui rue vivante et animée du centre­ville, la rue Brocherie d'aujourd'hui est la "rue du milieu" du Moyen­Age. Appelée au XVIe, rue "Moyenne de la Brocherie", certains pensaient que son nom lui venait de la "Bucherie", dérivatif du nom de l'hôtel particulier de Pierre Bucher, procureur général du Roi et doyen de l'université de Grenoble.
+		D'autres affirment que le nom provient des "marchants brochiers", vendeurs de brocs et de vases en bois, qui habitaient la rue.
+		
+		Enfin, au XIIIe siècle, dans la rue Brocherie que se situait le four à pain de la rive gauche de Grenoble. Les propriétaires du four n'étaient autres que le Dauphin et l'Evêque.</description>
+	</poi>
+	<poi>
+		<id>7</id>
+	    <titre>Halles Saintes­Claire</titre>
+		<lat>45.191441</lat>
+		<lon>5.730883</lon>
+		<description>C'est sur l'espace laissé vide par la destruction du Couvent Sainte­Claire en 1818 que les Halles voient le jour. A l'époque, les autorités de Grenoble estiment nécessaire de répondre aux besoins des habitants en édifiant un marché couvert, réalisé par l'architecte du département Hector Riondel.</description>
+	</poi>
+	<poi>
+		<id>8</id>
+	    <titre>Place Notre­Dame</titre>
+		<lat>45.192741</lat>
+		<lon>5.731538</lon>
+		<description>Avant de devenir Place Notre­Dame au Xe siècle, cet espace était auparavant la place Saint­Vincent, un lieu attenant à la Cathédrale et servant de cimetière.
+		A la révolution, alors que la Cathédrale devient le "Temple de la Raison", la place devient celle de la raison également.</description>
+	</poi>
+
+	<poi>
 		<id>∞</id>
 	    <titre>POOP</titre>
 		<lat>45.192740</lat>

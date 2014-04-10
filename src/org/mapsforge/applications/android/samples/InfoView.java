@@ -53,6 +53,16 @@ public class InfoView extends MapActivity implements TextToSpeech.OnInitListener
 	}
 
 	@Override
+	public void onDestroy() {
+		// Don't forget to shutdown tts!
+		if (tts != null) {
+			tts.stop();
+			tts.shutdown();
+		}
+		super.onDestroy();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
 		MenuInflater inflater = getMenuInflater();

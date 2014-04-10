@@ -21,7 +21,6 @@ import java.util.List;
 import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.overlay.ListOverlay;
 import org.mapsforge.android.maps.overlay.Marker;
-import org.mapsforge.android.maps.overlay.MyLocationOverlay;
 import org.mapsforge.android.maps.overlay.OverlayItem;
 import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.core.model.MapPosition;
@@ -32,6 +31,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -47,17 +47,18 @@ import android.widget.Toast;
 public class BasicMapViewer extends MapActivity {
 	private static final File MAP_FILE = new File(Environment.getExternalStorageDirectory().getPath(),
 			"rhone-alpes.map");
+	private static final int UPDATE_DISTANCE = 0;
+	private static final int UPDATE_INTERVAL = 1000;
 	ArrayList<POI> arrayPOI;
-	private MyLocationOverlay myLocationOverlay;
+	GPSTracker gps;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		try {
-
 			Bundle b = getIntent().getExtras();
-			// POI[] testing = (POI[]) this.getIntent().getExtras().get("paramArrayPOI");
+
 			arrayPOI = new ArrayList<POI>();
 			arrayPOI = b.getParcelableArrayList("paramArrayPOI");
 
@@ -85,6 +86,13 @@ public class BasicMapViewer extends MapActivity {
 
 			mapView.getMapViewPosition().setMapPosition(newMapPosition);
 			mapView.getOverlays().add(listOverlay);
+
+			// overlayItems = listOverlay.getOverlayItems();
+
+			// Activation du GPS
+			Drawable drawable = getResources().getDrawable(R.drawable.marker_green);
+			gps = new GPSTracker(BasicMapViewer.this, mapView, drawable);
+			gps.enableMyLocation(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,4 +149,16 @@ public class BasicMapViewer extends MapActivity {
 		Drawable drawable = getResources().getDrawable(resourceIdentifier);
 		return new MarkerCustom(geoPoint, Marker.boundCenterBottom(drawable), id);
 	}
+
+	public static GeoPoint locationToLatLong(Location location) {
+		return new GeoPoint(location.getLatitude(), location.getLongitude());
+	}
+
+	/*
+	 * private synchronized boolean enableBestAvailableProvider() { disableMyLocation(); Criteria criteria = new
+	 * Criteria(); criteria.setAccuracy(Criteria.ACCURACY_FINE); String bestAvailableProvider =
+	 * this.locationManager.getBestProvider(criteria, true); if (bestAvailableProvider == null) { return false; }
+	 * this.locationManager.requestLocationUpdates(bestAvailableProvider, UPDATE_INTERVAL, UPDATE_DISTANCE, this);
+	 * this.myLocationEnabled = true; return true; }
+	 */
 }

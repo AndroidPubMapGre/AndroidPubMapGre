@@ -14,10 +14,14 @@
  */
 package org.mapsforge.applications.android.samples;
 
+import java.util.List;
+
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.overlay.Circle;
+import org.mapsforge.android.maps.overlay.ListOverlay;
 import org.mapsforge.android.maps.overlay.Marker;
 import org.mapsforge.android.maps.overlay.Overlay;
+import org.mapsforge.android.maps.overlay.OverlayItem;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.core.model.Point;
@@ -40,7 +44,7 @@ import android.os.Bundle;
  * A thread-safe {@link Overlay} implementation to display a {@link Circle} and a {@link Drawable} at the user's current
  * location.
  */
-public class MyLocationOverlay implements LocationListener, Overlay {
+public class GPSTracker implements LocationListener, Overlay {
 	private static final int UPDATE_DISTANCE = 0;
 	private static final int UPDATE_INTERVAL = 1000;
 
@@ -71,7 +75,7 @@ public class MyLocationOverlay implements LocationListener, Overlay {
 		return paint;
 	}
 
-	private boolean centerAtNextFix;
+	private boolean centerAtNextFix = true;
 	private final Circle circle;
 	private Location lastLocation;
 	private final LocationManager locationManager;
@@ -90,7 +94,7 @@ public class MyLocationOverlay implements LocationListener, Overlay {
 	 * @param drawable
 	 *            a drawable to display at the current location (might be null).
 	 */
-	public MyLocationOverlay(Context context, MapView mapView, Drawable drawable) {
+	public GPSTracker(Context context, MapView mapView, Drawable drawable) {
 		this(context, mapView, drawable, getDefaultCircleFill(), getDefaultCircleStroke());
 	}
 
@@ -108,11 +112,18 @@ public class MyLocationOverlay implements LocationListener, Overlay {
 	 * @param circleStroke
 	 *            the {@code Paint} used to stroke the circle that represents the current location (might be null).
 	 */
-	public MyLocationOverlay(Context context, MapView mapView, Drawable drawable, Paint circleFill, Paint circleStroke) {
+	public GPSTracker(Context context, MapView mapView, Drawable drawable, Paint circleFill, Paint circleStroke) {
 		this.mapView = mapView;
 		this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		this.marker = new Marker(null, drawable);
 		this.circle = new Circle(null, 0, circleFill, circleStroke);
+
+		ListOverlay listOverlay = new ListOverlay();
+		List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
+
+		overlayItems.add(this.marker);
+		overlayItems.add(this.circle);
+		mapView.getOverlays().add(listOverlay);
 	}
 
 	/**
@@ -151,6 +162,7 @@ public class MyLocationOverlay implements LocationListener, Overlay {
 			return false;
 		}
 
+		this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, this);
 		this.centerAtNextFix = centerAtFirstFix;
 		return true;
 	}
@@ -187,6 +199,8 @@ public class MyLocationOverlay implements LocationListener, Overlay {
 	public void onLocationChanged(Location location) {
 		synchronized (this) {
 			this.lastLocation = location;
+
+			System.out.println("coucou " + location.getLatitude() + ", " + location.getLongitude());
 
 			GeoPoint geoPoint = locationToGeoPoint(location);
 			this.marker.setGeoPoint(geoPoint);

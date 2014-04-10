@@ -24,7 +24,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -80,7 +79,6 @@ public class Samples extends Activity {
 			Intent i = new Intent(this, BasicMapViewer.class);
 
 			i.putParcelableArrayListExtra("paramArrayPOI", arrayPOI);
-			Log.i("error", "coucou" + i.getParcelableArrayListExtra("paramArrayPOI"));
 			startActivity(i);
 		}
 	}
