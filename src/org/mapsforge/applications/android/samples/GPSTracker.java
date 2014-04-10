@@ -133,6 +133,10 @@ public class GPSTracker implements LocationListener, Overlay {
 		if (this.myLocationEnabled) {
 			this.myLocationEnabled = false;
 			this.locationManager.removeUpdates(this);
+
+			this.marker.setGeoPoint(null);
+			this.circle.setGeoPoint(null);
+			this.circle.setRadius(0);
 			this.mapView.getOverlayController().redrawOverlays();
 		}
 	}

@@ -10,4 +10,5 @@
     <string name="search_hint">Rechercher</string>
     <string name="app_name">GrenoblePOI</string>
     <string name="gps_activation">GPS en cours d\'activaction ...</string>
+    <string name="gps_desactivate">Désactivation du GPS</string>
 </resources>

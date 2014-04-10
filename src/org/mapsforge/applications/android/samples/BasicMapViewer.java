@@ -92,6 +92,24 @@ public class BasicMapViewer extends MapActivity {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		activateGPS();
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		desactivateGPS();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		desactivateGPS();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.map_bar_menu, menu);
@@ -119,17 +137,37 @@ public class BasicMapViewer extends MapActivity {
 		// Take appropriate action for each action item click
 		switch (item.getItemId()) {
 			case R.id.action_geoloc:
-				// Activation du GPS
-				Drawable drawable = getResources().getDrawable(R.drawable.ic_action_location_found);
-				this.gps = new GPSTracker(BasicMapViewer.this, this.mapView, drawable);
-				this.gps.setSnapToLocationEnabled(true);
-				this.gps.enableMyLocation(true);
-				if (this.gps.isMyLocationEnabled()) {
-					Toast.makeText(this, R.string.gps_activation, Toast.LENGTH_LONG).show();
+				if (this.gps != null) {
+					if (this.gps.isMyLocationEnabled()) {
+						this.gps.disableMyLocation();
+						Toast.makeText(this, R.string.gps_desactivate, Toast.LENGTH_LONG).show();
+					} else {
+						activateGPS();
+					}
+				} else {
+					activateGPS();
 				}
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	public void desactivateGPS() {
+		if (this.gps != null) {
+			if (this.gps.isMyLocationEnabled()) {
+				this.gps.disableMyLocation();
+			}
+		}
+	}
+
+	public void activateGPS() {
+		Drawable drawable = getResources().getDrawable(R.drawable.ic_action_location_found);
+		this.gps = new GPSTracker(BasicMapViewer.this, this.mapView, drawable);
+		this.gps.setSnapToLocationEnabled(true);
+		this.gps.enableMyLocation(true);
+		if (this.gps.isMyLocationEnabled()) {
+			Toast.makeText(this, R.string.gps_activation, Toast.LENGTH_LONG).show();
 		}
 	}
 
