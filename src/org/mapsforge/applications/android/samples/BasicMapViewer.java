@@ -28,8 +28,10 @@ import org.mapsforge.map.reader.header.FileOpenResult;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
@@ -48,14 +50,21 @@ public class BasicMapViewer extends MapActivity {
 	private static final File MAP_FILE = new File(Environment.getExternalStorageDirectory().getPath(),
 			"rhone-alpes.map");
 	ArrayList<POI> arrayPOI;
-	GPSTracker gps;
+	GPSTrackerMapView gps;
 	MapViewCustom mapView;
+
+	MyReceiver myReceiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		try {
+			this.myReceiver = new MyReceiver();
+			IntentFilter intentFilter = new IntentFilter();
+			intentFilter.addAction(LocalService.MY_ACTION);
+			registerReceiver(this.myReceiver, intentFilter);
+
 			Bundle b = getIntent().getExtras();
 
 			this.arrayPOI = new ArrayList<POI>();
@@ -86,6 +95,10 @@ public class BasicMapViewer extends MapActivity {
 			this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
 			this.mapView.getOverlays().add(listOverlay);
 
+			Intent i = new Intent(this, LocalService.class);
+			i.putParcelableArrayListExtra("paramArrayPOI", this.arrayPOI);
+			this.startService(i);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -94,7 +107,9 @@ public class BasicMapViewer extends MapActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		activateGPS();
+		if (this.gps != null) {
+			activateGPS();
+		}
 	}
 
 	@Override
@@ -163,7 +178,7 @@ public class BasicMapViewer extends MapActivity {
 
 	public void activateGPS() {
 		Drawable drawable = getResources().getDrawable(R.drawable.ic_action_location_found);
-		this.gps = new GPSTracker(BasicMapViewer.this, this.mapView, drawable);
+		this.gps = new GPSTrackerMapView(BasicMapViewer.this, this.mapView, drawable);
 		this.gps.setSnapToLocationEnabled(true);
 		this.gps.enableMyLocation(true);
 		if (this.gps.isMyLocationEnabled()) {
@@ -173,7 +188,6 @@ public class BasicMapViewer extends MapActivity {
 
 	public void launchInfoView(int idPOI) {
 		if (this.arrayPOI.get(idPOI) != null) {
-			System.out.println("coucou " + idPOI);
 			Intent i = new Intent(this, InfoView.class);
 			i.putExtra("paramIdPOI", idPOI);
 			i.putParcelableArrayListExtra("paramArrayPOI", this.arrayPOI);
@@ -192,11 +206,11 @@ public class BasicMapViewer extends MapActivity {
 		return new GeoPoint(location.getLatitude(), location.getLongitude());
 	}
 
-	/*
-	 * private synchronized boolean enableBestAvailableProvider() { disableMyLocation(); Criteria criteria = new
-	 * Criteria(); criteria.setAccuracy(Criteria.ACCURACY_FINE); String bestAvailableProvider =
-	 * this.locationManager.getBestProvider(criteria, true); if (bestAvailableProvider == null) { return false; }
-	 * this.locationManager.requestLocationUpdates(bestAvailableProvider, UPDATE_INTERVAL, UPDATE_DISTANCE, this);
-	 * this.myLocationEnabled = true; return true; }
-	 */
+	private class MyReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context arg0, Intent arg1) {
+			int datapassed = arg1.getIntExtra("DATAPASSED", 73);
+			launchInfoView(datapassed);
+		}
+	}
 }

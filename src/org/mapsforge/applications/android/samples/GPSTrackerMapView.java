@@ -44,7 +44,7 @@ import android.os.Bundle;
  * A thread-safe {@link Overlay} implementation to display a {@link Circle} and a {@link Drawable} at the user's current
  * location.
  */
-public class GPSTracker implements LocationListener, Overlay {
+public class GPSTrackerMapView implements LocationListener, Overlay {
 	private static final int UPDATE_DISTANCE = 0;
 	private static final int UPDATE_INTERVAL = 1000;
 
@@ -94,7 +94,7 @@ public class GPSTracker implements LocationListener, Overlay {
 	 * @param drawable
 	 *            a drawable to display at the current location (might be null).
 	 */
-	public GPSTracker(Context context, MapView mapView, Drawable drawable) {
+	public GPSTrackerMapView(Context context, MapView mapView, Drawable drawable) {
 		this(context, mapView, drawable, getDefaultCircleFill(), getDefaultCircleStroke());
 	}
 
@@ -112,7 +112,7 @@ public class GPSTracker implements LocationListener, Overlay {
 	 * @param circleStroke
 	 *            the {@code Paint} used to stroke the circle that represents the current location (might be null).
 	 */
-	public GPSTracker(Context context, MapView mapView, Drawable drawable, Paint circleFill, Paint circleStroke) {
+	public GPSTrackerMapView(Context context, MapView mapView, Drawable drawable, Paint circleFill, Paint circleStroke) {
 		this.mapView = mapView;
 		this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		this.marker = new Marker(null, drawable);
@@ -204,7 +204,7 @@ public class GPSTracker implements LocationListener, Overlay {
 		synchronized (this) {
 			this.lastLocation = location;
 
-			System.out.println("coucou " + location.getLatitude() + ", " + location.getLongitude());
+			// System.out.println("coucou " + location.getLatitude() + ", " + location.getLongitude());
 
 			GeoPoint geoPoint = locationToGeoPoint(location);
 			this.marker.setGeoPoint(geoPoint);

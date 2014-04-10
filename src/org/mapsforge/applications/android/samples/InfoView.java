@@ -39,8 +39,6 @@ public class InfoView extends MapActivity implements TextToSpeech.OnInitListener
 		arrayPOI = new ArrayList<POI>();
 		arrayPOI = b.getParcelableArrayList("paramArrayPOI");
 
-		System.out.println("coucou " + idPOI);
-
 		TextView et = (TextView) findViewById(R.id.titreInfo);
 		et.setText("" + arrayPOI.get(idPOI).titre);
 		et.setActivated(false);

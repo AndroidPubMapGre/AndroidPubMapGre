@@ -24,6 +24,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.widget.Toast;
 
 /**
@@ -76,6 +77,7 @@ public class Samples extends Activity {
 
 	private void nextStep(ArrayList<POI> arrayPOI) {
 		if (this.gpsOn && this.poiOk) {
+			SystemClock.sleep(3000);
 			Intent i = new Intent(this, BasicMapViewer.class);
 
 			i.putParcelableArrayListExtra("paramArrayPOI", arrayPOI);
